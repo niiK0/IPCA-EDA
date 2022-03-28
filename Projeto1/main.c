@@ -12,7 +12,7 @@ void main(){
     }
     jobHead = read_job(planFile);
 
-    showJob(jobHead->next);
+    showJob(jobHead);
 
     fclose(planFile);
 }
