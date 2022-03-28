@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "headers/structs.h"
+#include "headers/menus.h"
 
 void main(){
-    FILE *planFile;
     job *jobHead = NULL;
 
-    if((planFile = fopen("plan.txt", "r")) == NULL){
-        printf("File not found!");
-        exit(1);
+    jobHead = read_job();
+
+    job *jtemp = jobHead;
+    while(jtemp != NULL){
+        showJob(jtemp);
+        printf("\n");
+        jtemp = jtemp->next;
     }
-    jobHead = read_job(planFile);
 
-    showJob(jobHead);
-
-    fclose(planFile);
 }

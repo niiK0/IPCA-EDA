@@ -31,7 +31,6 @@ machine *m_create_new(int id);
 machine *m_insert_end(machine **head, machine *machine_to_insert);
 machine *m_find(machine *head, int id);
 
-job *read_job(FILE *planFile);
-operation *read_operations(FILE *planFile);
+job *read_job();
 
 void showJob(job *job);
