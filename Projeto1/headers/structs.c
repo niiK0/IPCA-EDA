@@ -49,7 +49,7 @@ void showJobs(job *head)
     job *temp = head;
     while (temp != NULL)
     {
-        printf("  Id: %d", temp->id);
+        printf("Id: %d  ", temp->id);
         temp = temp->next;
     }
 }
@@ -95,6 +95,14 @@ operation *o_find(operation *head, int num)
         temp = temp->next;
     }
     return NULL;
+}
+
+operation *o_get_last(operation *head){
+    operation *temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    return temp;
 }
 
 void showOperations(operation *head)
@@ -163,7 +171,8 @@ job *read_job()
 {
     FILE *planFile;
 
-    if((planFile = fopen("plan.txt", "r")) == NULL){
+    if ((planFile = fopen("plan.txt", "r")) == NULL)
+    {
         printf("File not found!");
         return NULL;
     }
@@ -176,8 +185,8 @@ job *read_job()
 
     do
     { // scan until file end
-        //reads lines in pairs and resets no lines where it starts with "99";
-        // GET MACHINES
+        // reads lines in pairs and resets no lines where it starts with "99";
+        //  GET MACHINES
         while (fscanf(planFile, " %d", &i) == 1) // read line 1
         {
             if (i == 99) // when changing jobs
@@ -194,9 +203,9 @@ job *read_job()
             machineHead = m_insert_end(&machineHead, mtemp);
             mCount++;
         }
-        fscanf(planFile, "%*c", temp); //skips to next line
+        fscanf(planFile, "%*c", temp); // skips to next line
         // GET TIMINGS
-        while (fscanf(planFile, " %d", &i) == 1) //reads line 2
+        while (fscanf(planFile, " %d", &i) == 1) // reads line 2
         {
             if (alreadyCreatedO == 0)
             {
@@ -212,8 +221,8 @@ job *read_job()
         alreadyCreatedO = 0;
         machineHead = NULL;
         mCount = 1;
-    }while (fscanf(planFile, "%*c", &temp) != EOF);
-    //create job for the last operations
+    } while (fscanf(planFile, "%*c", &temp) != EOF);
+    // create job for the last operations
     job *jtemp = j_create_new(jobCount, operationHead);
     jobHead = j_insert_end(&jobHead, jtemp);
 
@@ -221,6 +230,77 @@ job *read_job()
 
     return jobHead;
 }
+
+void write_job(job *head)
+{
+    FILE *planFile;
+
+    if ((planFile = fopen("test.txt", "w")) == NULL)
+    {
+        printf("File not found!");
+        return;
+    }
+
+    job *jtemp = head;
+    while (jtemp != NULL)
+    {
+        // read operations
+        operation *otemp = jtemp->operationHead;
+        while (otemp != NULL)
+        {
+            // read machine head of the operation
+            machine *mtemp = otemp->machineHead;
+            // write machine id's line
+            while (mtemp != NULL)
+            {
+                if (mtemp->next == NULL)
+                {
+                    fprintf(planFile, "%d,\n", mtemp->id);
+                }
+                else
+                {
+                    fprintf(planFile, "%d ", mtemp->id);
+                }
+                mtemp = mtemp->next;
+            }
+            // write machine time lines
+            mtemp = otemp->machineHead;
+            while (mtemp != NULL)
+            {
+                if (mtemp->next == NULL)
+                {
+                    fprintf(planFile, "%d,\n", mtemp->timeValue);
+                }
+                else
+                {
+                    fprintf(planFile, "%d ", mtemp->timeValue);
+                }
+                mtemp = mtemp->next;
+            }
+            otemp = otemp->next;
+        }
+        jtemp = jtemp->next;
+
+        if (jtemp != NULL)
+        {
+            fprintf(planFile, "99,\n");
+        }
+    }
+
+    fclose(planFile);
+}
+
+// void refresh_data(){
+//     job *jhead = read_job();
+//     write_job();
+// }
+
+// job *create_operation(job *j_head, job *job_where_to_insert, operation *op_to_insert){
+//     job *jtemp = j_head;
+//     o_create_new(o_get_last(jtemp->operationHead)->num + 1, op_to_insert->machineHead);
+//     o_insert_end(job_where_to_insert->operationHead, );
+//     return jtemp;
+// }
 
 void showJob(job *job)
 {

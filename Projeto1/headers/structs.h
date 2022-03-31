@@ -25,6 +25,7 @@ void showOperations(operation *head);
 operation *o_create_new(int operationId, machine *machineHead);
 operation *o_insert_end(operation **head, operation *operation_to_insert);
 operation *o_find(operation *head, int num);
+operation *o_get_last(operation *head);
 
 void showMachines(machine *machineHead);
 machine *m_create_new(int id);
@@ -32,5 +33,8 @@ machine *m_insert_end(machine **head, machine *machine_to_insert);
 machine *m_find(machine *head, int id);
 
 job *read_job();
+void write_job(job *head);
+
+job *create_operation(job *j_head, job *job_where_to_insert, operation *op_to_insert);
 
 void showJob(job *job);

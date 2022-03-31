@@ -4,15 +4,13 @@
 #include "headers/menus.h"
 
 void main(){
-    job *jobHead = NULL;
+    // job *jobHead = NULL;
 
-    jobHead = read_job();
+    // jobHead = read_job();
 
-    job *jtemp = jobHead;
-    while(jtemp != NULL){
-        showJob(jtemp);
-        printf("\n");
-        jtemp = jtemp->next;
-    }
-
+    // job *jtemp = jobHead;
+    // read_job(jtemp);
+    // printf("\n\n");
+    MainMenu();
+    // create_operation(jtemp, jtemp->operationHead, )
 }

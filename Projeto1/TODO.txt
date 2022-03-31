@@ -1,8 +1,7 @@
 FASE 1:
 
-1. Definição de uma estrutura de dados dinâmica para a representação de um job com um conjunto finito de n
-operações;
-2. Armazenamento/leitura de ficheiro de texto com representação de um job;
+1. ✓
+2. ✓
 3. Inserção de uma nova operação;
 4. Remoção de uma determinada operação;
 5. Alteração de uma determinada operação;
