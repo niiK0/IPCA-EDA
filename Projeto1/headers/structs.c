@@ -223,7 +223,7 @@ machine *m_remove(machine *head, machine *machine_to_remove){
         if(mtemp->next == machine_to_remove){
             mtemp->next = machine_to_remove->next;
             free(machine_to_remove);
-            return mtemp;
+            return head;
         }
         mtemp = mtemp->next;
     }
