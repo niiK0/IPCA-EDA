@@ -1,8 +1,24 @@
+/**
+ * Author: Nicolae Malai
+ * Email: a23495@alunos.ipca.pt
+ * Github: niiK0
+ * Date: 27/03/2022
+ * Descrição: Functions of the structs, Trabalho Pratico - EDA
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "structs.h"
 
 // Jobs
+/**
+  * @brief Creates new job
+  * 
+  * @param [in] Int job id
+  * @param [in] Pointer job header
+  * 
+  * @param [out] Pointer job header
+ */
 job *j_create_new(int jobId, operation *operationHead)
 {
     job *result = malloc(sizeof(job));
@@ -12,6 +28,14 @@ job *j_create_new(int jobId, operation *operationHead)
     return result;
 }
 
+/**
+  * @brief inserts job at end
+  * 
+  * @param [in] Pointer of pointer of job header
+  * @param [in] Pointer job to insert
+  * 
+  * @param [out] Pointer job header
+ */
 job *j_insert_end(job **head, job *job_to_insert)
 {
     job_to_insert->next = NULL;
@@ -32,6 +56,14 @@ job *j_insert_end(job **head, job *job_to_insert)
     return *head;
 }
 
+/**
+  * @brief find a job
+  * 
+  * @param [in] Pointer job header
+  * @param [in] int job id
+  * 
+  * @param [out] Pointer job
+ */
 job *j_find(job *head, int id)
 {
     job *temp = head;
@@ -44,6 +76,11 @@ job *j_find(job *head, int id)
     return NULL;
 }
 
+/**
+  * @brief Shows all jobs
+  * 
+  * @param [in] Pointer of job header
+ */
 void showJobs(job *head)
 {
     job *temp = head;
@@ -55,6 +92,14 @@ void showJobs(job *head)
 }
 
 // Operations
+/**
+  * @brief Creates new operation
+  * 
+  * @param [in] Int operation id
+  * @param [in] Pointer operation header
+  * 
+  * @param [out] Pointer operation header
+ */
 operation *o_create_new(int operationId, machine *machineHead)
 {
 
@@ -65,6 +110,14 @@ operation *o_create_new(int operationId, machine *machineHead)
     return result;
 }
 
+/**
+  * @brief inserts operation at end
+  * 
+  * @param [in] Pointer of pointer of operation header
+  * @param [in] Pointer operation to insert
+  * 
+  * @param [out] Pointer operation header
+ */
 operation *o_insert_end(operation **head, operation *operation_to_insert)
 {
     operation_to_insert->next = NULL;
@@ -85,6 +138,14 @@ operation *o_insert_end(operation **head, operation *operation_to_insert)
     return *head;
 }
 
+/**
+  * @brief find a operation
+  * 
+  * @param [in] Pointer operation header
+  * @param [in] int operation id
+  * 
+  * @param [out] Pointer operation
+ */
 operation *o_find(operation *head, int num)
 {
     operation *temp = head;
@@ -97,6 +158,13 @@ operation *o_find(operation *head, int num)
     return NULL;
 }
 
+/**
+  * @brief find last operation in header
+  * 
+  * @param [in] Pointer operation header
+  * 
+  * @param [out] Pointer operation
+ */
 operation *o_get_last(operation *head){
     operation *temp = head;
     while(temp->next != NULL){
@@ -105,6 +173,11 @@ operation *o_get_last(operation *head){
     return temp;
 }
 
+/**
+  * @brief Shows all operations
+  * 
+  * @param [in] Pointer of operation header
+ */
 void showOperations(operation *head)
 {
     operation *temp = head;
@@ -116,13 +189,11 @@ void showOperations(operation *head)
 }
 
 // Machine
-machine *m_create_new(int id)
-{
-    machine *result = malloc(sizeof(machine));
-    result->id = id;
-    result->next = NULL;
-}
-
+/**
+  * @brief Shows all machines
+  * 
+  * @param [in] Pointer of machine header
+ */
 void showMachines(machine *head)
 {
     machine *temp = head;
@@ -133,6 +204,56 @@ void showMachines(machine *head)
     }
 }
 
+/**
+  * @brief removes a machine
+  * 
+  * @param [in] Pointer machine header
+  * @param [in] Pointer machine to remove
+  * 
+  * @param [out] Pointer machine header
+ */
+machine *m_remove(machine *head, machine *machine_to_remove){
+    machine *mtemp = head;
+    while(mtemp != NULL){
+        if(mtemp == machine_to_remove){
+            head = mtemp->next;
+            free(machine_to_remove);
+            return head;
+        }
+        if(mtemp->next == machine_to_remove){
+            mtemp->next = machine_to_remove->next;
+            free(machine_to_remove);
+            return mtemp;
+        }
+        mtemp = mtemp->next;
+    }
+
+    return mtemp;
+}
+
+/**
+  * @brief Creates new machine
+  * 
+  * @param [in] Int machine id
+  * @param [in] Pointer machine header
+  * 
+  * @param [out] Pointer machine header
+ */
+machine *m_create_new(int id)
+{
+    machine *result = malloc(sizeof(machine));
+    result->id = id;
+    result->next = NULL;
+}
+
+/**
+  * @brief inserts machine at end
+  * 
+  * @param [in] Pointer of pointer of machine header
+  * @param [in] Pointer machine to insert
+  * 
+  * @param [out] Pointer machine header
+ */
 machine *m_insert_end(machine **head, machine *machine_to_insert)
 {
     machine_to_insert->next = NULL;
@@ -153,6 +274,14 @@ machine *m_insert_end(machine **head, machine *machine_to_insert)
     return *head;
 }
 
+/**
+  * @brief find a machine
+  * 
+  * @param [in] Pointer machine header
+  * @param [in] int machine id
+  * 
+  * @param [out] Pointer machine
+ */
 machine *m_find(machine *head, int id)
 {
     machine *temp = head;
@@ -166,7 +295,11 @@ machine *m_find(machine *head, int id)
 }
 
 // General
-
+/**
+  * @brief reads plan file to get all jobs
+  * 
+  * @param [out] Pointer job header
+ */
 job *read_job()
 {
     FILE *planFile;
@@ -231,6 +364,11 @@ job *read_job()
     return jobHead;
 }
 
+/**
+  * @brief writes jobs to file
+  * 
+  * @param [in] Pointer job header
+ */
 void write_job(job *head)
 {
     FILE *planFile;
@@ -290,18 +428,11 @@ void write_job(job *head)
     fclose(planFile);
 }
 
-// void refresh_data(){
-//     job *jhead = read_job();
-//     write_job();
-// }
-
-// job *create_operation(job *j_head, job *job_where_to_insert, operation *op_to_insert){
-//     job *jtemp = j_head;
-//     o_create_new(o_get_last(jtemp->operationHead)->num + 1, op_to_insert->machineHead);
-//     o_insert_end(job_where_to_insert->operationHead, );
-//     return jtemp;
-// }
-
+/**
+  * @brief Shows a specific job
+  * 
+  * @param [in] Pointer job
+ */
 void showJob(job *job)
 {
     printf("Job %d :\n", job->id);
