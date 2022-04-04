@@ -373,7 +373,7 @@ void write_job(job *head)
 {
     FILE *planFile;
 
-    if ((planFile = fopen("test.txt", "w")) == NULL)
+    if ((planFile = fopen("plan.txt", "w")) == NULL)
     {
         printf("File not found!");
         return;
