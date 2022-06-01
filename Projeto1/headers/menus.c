@@ -13,12 +13,12 @@
 #include "menus.h"
 
 /**
-  * @brief Function to verify user input
-  * 
-  * @param [in] Int min value
-  * @param [in] Int max value
-  * 
-  * @param [out] Int user choice
+ * @brief Function to verify user input
+ *
+ * @param [in] Int min value
+ * @param [in] Int max value
+ *
+ * @param [out] Int user choice
  */
 int GetInt(int min, int max) // gets the user choice as an integer between or equal to min and max
 {
@@ -39,7 +39,7 @@ int GetInt(int min, int max) // gets the user choice as an integer between or eq
 }
 
 /**
-  * @brief Main Menu
+ * @brief Main Menu
  */
 void MainMenu()
 {
@@ -55,9 +55,10 @@ void MainMenu()
                "\t Enter 3 - Remove Operation\n"
                "\t Enter 4 - Change Operation\n"
                "\t Enter 5 - Data\n"
+               "\t Enter 6 - Write to file\n"
                "\n\t Enter 0 - Quit\n");
 
-        ChoiceInt = GetInt(0, 5);
+        ChoiceInt = GetInt(0, 6);
         switch (ChoiceInt)
         {
         case 1:
@@ -75,6 +76,9 @@ void MainMenu()
         case 5:
             data_menu(jobHead);
             break;
+        case 6:
+            write_job(jobHead);
+            break;
         case 0:
             break;
         default:
@@ -87,11 +91,11 @@ void MainMenu()
 }
 
 /**
-  * @brief Menu for operation changes
-  * 
-  * @param [in] Pointer job header
-  * 
-  * @param [out] Pointer job header
+ * @brief Menu for operation changes
+ *
+ * @param [in] Pointer job header
+ *
+ * @param [out] Pointer job header
  */
 job *change_operation_menu(job *head)
 {
@@ -155,11 +159,11 @@ job *change_operation_menu(job *head)
 }
 
 /**
-  * @brief Menu for operation remove
-  * 
-  * @param [in] Pointer job header
-  * 
-  * @param [out] Pointer job header
+ * @brief Menu for operation remove
+ *
+ * @param [in] Pointer job header
+ *
+ * @param [out] Pointer job header
  */
 job *remove_operation_menu(job *head)
 {
@@ -232,9 +236,9 @@ job *remove_operation_menu(job *head)
 }
 
 /**
-  * @brief Menu for job list
-  * 
-  * @param [in] Pointer job header
+ * @brief Menu for job list
+ *
+ * @param [in] Pointer job header
  */
 void job_list_menu(job *head)
 {
@@ -269,9 +273,9 @@ void job_list_menu(job *head)
 }
 
 /**
-  * @brief Function to find lowest time value for a job
-  * 
-  * @param [in] Pointer job header
+ * @brief Function to find lowest time value for a job
+ *
+ * @param [in] Pointer job header
  */
 void find_lowest_for_job(job *head)
 {
@@ -328,9 +332,9 @@ void find_lowest_for_job(job *head)
 }
 
 /**
-  * @brief Function to find highest time value for a job
-  * 
-  * @param [in] Pointer job header
+ * @brief Function to find highest time value for a job
+ *
+ * @param [in] Pointer job header
  */
 void find_highest_for_job(job *head)
 {
@@ -387,9 +391,9 @@ void find_highest_for_job(job *head)
 }
 
 /**
-  * @brief Function to find average time value for an operation
-  * 
-  * @param [in] Pointer job header
+ * @brief Function to find average time value for an operation
+ *
+ * @param [in] Pointer job header
  */
 void find_average_for_operation(job *head)
 {
@@ -450,7 +454,7 @@ void find_average_for_operation(job *head)
         mtemp = mtemp->next;
     }
 
-    total_time = total_time/mCount;
+    total_time = total_time / mCount;
 
     system("cls");
     printf("\n\tAverage time value for operation: %d .\n\n", total_time);
@@ -461,9 +465,9 @@ void find_average_for_operation(job *head)
 }
 
 /**
-  * @brief Menu for the different statistics
-  * 
-  * @param [in] Pointer job header
+ * @brief Menu for the different statistics
+ *
+ * @param [in] Pointer job header
  */
 void data_menu(job *head)
 {
@@ -500,11 +504,11 @@ void data_menu(job *head)
 }
 
 /**
-  * @brief Menu to add a new operation to the job
-  * 
-  * @param [in] Pointer job header
-  * 
-  * @param [out] Pointer job header
+ * @brief Menu to add a new operation to the job
+ *
+ * @param [in] Pointer job header
+ *
+ * @param [out] Pointer job header
  */
 job *add_operation_menu(job *head)
 {
@@ -598,12 +602,12 @@ job *add_operation_menu(job *head)
 }
 
 /**
-  * @brief Menu to choose the change you want to make on an operation
-  * 
-  * @param [in] Pointer selected operation
-  * @param [in] Pointer operation header
-  * 
-  * @param [out] Pointer operation header
+ * @brief Menu to choose the change you want to make on an operation
+ *
+ * @param [in] Pointer selected operation
+ * @param [in] Pointer operation header
+ *
+ * @param [out] Pointer operation header
  */
 operation *choose_change_operation_menu(operation *selected_operation, operation *head)
 {
@@ -730,11 +734,11 @@ operation *choose_change_operation_menu(operation *selected_operation, operation
 }
 
 /**
-  * @brief Menu to add a new machine to an operation
-  * 
-  * @param [in] Pointer machine header
-  * 
-  * @param [out] Pointer machine header
+ * @brief Menu to add a new machine to an operation
+ *
+ * @param [in] Pointer machine header
+ *
+ * @param [out] Pointer machine header
  */
 machine *add_machine_menu(machine *m_head)
 {
