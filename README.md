@@ -1,4 +1,4 @@
-# EDA
+# EDA (C)
 
 Coding files for "Estruturas de Dados Avançadas".
 
